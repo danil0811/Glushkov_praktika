@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e9aeb9961a1b4c0e879b9caecd30e7cc" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="PraktikaModel.Appoiment" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikaModel.Branch" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikaModel.City" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikaModel.Client" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikaModel.Contract" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikaModel.ContractBMC" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikaModel.Employee" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikaModel.MedicalCenter" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikaModel.Payment" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PraktikaModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="PraktikaModel.FK_Employee_Appoiment" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikaModel.FK_Branch_City" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikaModel.FK_Contract_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikaModel.FK_ContractBMC_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikaModel.FK_MedicalCenter_City" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikaModel.FK_Contract_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikaModel.FK_Payment_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikaModel.FK_Contract_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikaModel.FK_Contract_Payment" ManuallyRouted="false" />
+        <AssociationConnector Association="PraktikaModel.FK_ContractBMC_MedicalCenter" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

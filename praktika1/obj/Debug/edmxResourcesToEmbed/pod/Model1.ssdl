@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище PraktikaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Appoiment">
+    <Key>
+      <PropertyRef Name="IdAppoiment" />
+    </Key>
+    <Property Name="IdAppoiment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameOfAppoiment" Type="nvarchar" MaxLength="300" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="IdBranch" />
+    </Key>
+    <Property Name="IdBranch" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCity" Type="int" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="NumberOfPhone" Type="nvarchar" MaxLength="18" Nullable="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="IdCity" />
+    </Key>
+    <Property Name="IdCity" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameOFCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="IdClient" />
+    </Key>
+    <Property Name="IdClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="SecondName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Patronymic" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="NumberOfPasspors" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NumberOfPhone" Type="nvarchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="Contract">
+    <Key>
+      <PropertyRef Name="IdContract" />
+    </Key>
+    <Property Name="IdContract" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdClient" Type="int" Nullable="false" />
+    <Property Name="AmountInsurance" Type="money" Nullable="false" />
+    <Property Name="IdBranch" Type="int" Nullable="false" />
+    <Property Name="IdEmployee" Type="int" Nullable="false" />
+    <Property Name="PeriodOfInsurance" Type="datetime" Nullable="false" />
+    <Property Name="IdPayment" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContractBMC">
+    <Key>
+      <PropertyRef Name="IdMEdicalCenter" />
+    </Key>
+    <Property Name="IdMEdicalCenter" Type="int" Nullable="false" />
+    <Property Name="IdBranch" Type="int" Nullable="false" />
+    <Property Name="ContractPeriod" Type="datetime" Nullable="false" />
+    <Property Name="ContractAmunt" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="IdEmployee" />
+    </Key>
+    <Property Name="IdEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="SecondName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Patronymic" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IdBranch" Type="int" Nullable="false" />
+    <Property Name="IdAppointment" Type="int" Nullable="false" />
+    <Property Name="NumberOfPhone" Type="nvarchar" MaxLength="18" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedicalCenter">
+    <Key>
+      <PropertyRef Name="IdMedicalCenter" />
+    </Key>
+    <Property Name="IdMedicalCenter" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCity" Type="int" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="NumberOfPhone" Type="nvarchar" MaxLength="18" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="IdPayment" />
+    </Key>
+    <Property Name="IdPayment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeOfPayment" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateOfPayment" Type="datetime" Nullable="false" />
+    <Property Name="IdClient" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Branch_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="IdCity" />
+      </Principal>
+      <Dependent Role="Branch">
+        <PropertyRef Name="IdCity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="IdBranch" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="IdBranch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="IdClient" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="IdClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="IdEmployee" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contract_Payment">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+    <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="IdPayment" />
+      </Principal>
+      <Dependent Role="Contract">
+        <PropertyRef Name="IdPayment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractBMC_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+    <End Role="ContractBMC" Type="Self.ContractBMC" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="IdBranch" />
+      </Principal>
+      <Dependent Role="ContractBMC">
+        <PropertyRef Name="IdBranch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContractBMC_MedicalCenter">
+    <End Role="MedicalCenter" Type="Self.MedicalCenter" Multiplicity="1" />
+    <End Role="ContractBMC" Type="Self.ContractBMC" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MedicalCenter">
+        <PropertyRef Name="IdMedicalCenter" />
+      </Principal>
+      <Dependent Role="ContractBMC">
+        <PropertyRef Name="IdMEdicalCenter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Appoiment">
+    <End Role="Appoiment" Type="Self.Appoiment" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Appoiment">
+        <PropertyRef Name="IdAppoiment" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="IdAppointment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalCenter_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="MedicalCenter" Type="Self.MedicalCenter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="IdCity" />
+      </Principal>
+      <Dependent Role="MedicalCenter">
+        <PropertyRef Name="IdCity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="IdClient" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="IdClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище PraktikaModelContainer">
+    <EntitySet Name="Appoiment" EntityType="Self.Appoiment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContractBMC" EntityType="Self.ContractBMC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MedicalCenter" EntityType="Self.MedicalCenter" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Branch_City" Association="Self.FK_Branch_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Branch" EntitySet="Branch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Branch" Association="Self.FK_Contract_Branch">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Client" Association="Self.FK_Contract_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Employee" Association="Self.FK_Contract_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contract_Payment" Association="Self.FK_Contract_Payment">
+      <End Role="Payment" EntitySet="Payment" />
+      <End Role="Contract" EntitySet="Contract" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractBMC_Branch" Association="Self.FK_ContractBMC_Branch">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="ContractBMC" EntitySet="ContractBMC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContractBMC_MedicalCenter" Association="Self.FK_ContractBMC_MedicalCenter">
+      <End Role="MedicalCenter" EntitySet="MedicalCenter" />
+      <End Role="ContractBMC" EntitySet="ContractBMC" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Appoiment" Association="Self.FK_Employee_Appoiment">
+      <End Role="Appoiment" EntitySet="Appoiment" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalCenter_City" Association="Self.FK_MedicalCenter_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="MedicalCenter" EntitySet="MedicalCenter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Client" Association="Self.FK_Payment_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
